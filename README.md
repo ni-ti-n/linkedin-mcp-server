@@ -21,16 +21,17 @@ HTTP** (hosted) from the same codebase.
 
 ---
 
-## Amazon Quick vs Amazon Q — read this first
+## Amazon Quick Desktop vs Amazon Quick Web — read this first
 
-They are **different products** with **different MCP requirements**:
+Amazon Quick comes in two forms with **different MCP requirements**:
 
-| Client | Transport it needs | How to run this server |
+| Surface | Transport it needs | How to run this server |
 |---|---|---|
-| **Amazon Quick Desktop** (local app) | Local connector (runs a command) **or** Remote HTTP | Run over **stdio** (default). Add as a *Local* connector. |
-| **Amazon Quick Suite** (cloud/console) | **Remote only** — streamable HTTP / SSE over HTTPS; stdio **not** supported | Run over **HTTP** and host it (e.g. behind Bedrock AgentCore Runtime), then add as an MCP integration. |
-| **Amazon Q Developer CLI** | Local stdio | Run over **stdio** (default). |
-| **Claude Desktop / Cline / Continue** | Local stdio | Run over **stdio** (default). |
+| **Amazon Quick Desktop** (native app) | Local connector (runs a command) **or** remote HTTP | Run over **stdio** (default). Add as a *Local* connector. |
+| **Amazon Quick Web** (browser / cloud, aka Quick Suite) | **Remote only** — streamable HTTP / SSE over HTTPS; stdio **not** supported | Run over **HTTP** and host it (e.g. behind Bedrock AgentCore Runtime), then add as a remote MCP connector. |
+
+Every **other** MCP client — Amazon Q Developer CLI, Claude Desktop, Cline,
+Continue — runs the default **stdio** server locally, exactly like Quick Desktop.
 
 The transport is a single env var (`LINKEDIN_MCP_TRANSPORT=stdio|http`) — no code
 change between the two.
@@ -158,7 +159,7 @@ Desktop App → **Customize → Connectors → Create → Create local connector
 - **Arguments**: `-m linkedin_mcp.server`
 - **Environment variables**: `LINKEDIN_ACCESS_TOKEN` = your token
 
-### Amazon Quick Suite (cloud, remote HTTP)
+### Amazon Quick Web (browser / cloud, remote HTTP)
 Host the server with `LINKEDIN_MCP_TRANSPORT=http` behind an HTTPS endpoint
 (e.g. Bedrock AgentCore Runtime). Then in the Quick console →
 **Connectors → Model Context Protocol (MCP)** → set the **MCP server endpoint**
