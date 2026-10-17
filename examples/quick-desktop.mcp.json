@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "linkedin": {
+      "command": "/absolute/path/to/linkedin-mcp-server/.venv/bin/python",
+      "args": ["-m", "linkedin_mcp.server"],
+      "env": {
+        "LINKEDIN_ACCESS_TOKEN": "PASTE_YOUR_60_DAY_TOKEN_HERE",
+        "LINKEDIN_API_VERSION": "202606",
+        "LINKEDIN_MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
